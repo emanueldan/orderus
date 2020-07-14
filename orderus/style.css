@@ -1,0 +1,44 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+}
+.round {
+    display: inline-block;
+    vertical-align: top;
+    width: 44%;
+    margin: 1% 2%;
+    padding: 2%;
+    border: 1px solid;
+    box-sizing: border-box;
+    background-color: #232323;
+    color: #fff;
+}
+h1 {
+    margin: 0;
+    color: #fff;
+}
+h2 {
+    margin: 5px 0;
+}
+h3 {
+    margin: 5px 0;
+}
+.before {
+    margin-bottom: 10px;
+}
+.fin h3 {
+    color: #fff;
+}
+.fin {
+    width: 100%;
+    text-align: center;
+    display: block;
+    padding: 40px 0;
+}
+@media only screen and (max-width: 600px) { 
+    .round {
+        width: 96%;
+    }
+}
