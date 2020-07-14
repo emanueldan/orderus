@@ -1,2 +1,2 @@
 # orderus
-Running preview: https://about.emanueldan.ro/orderus/
+Link: https://about.emanueldan.ro/orderus/
