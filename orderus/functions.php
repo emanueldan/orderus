@@ -36,45 +36,36 @@ class XGame {
             }
             
         }
-        
         return $game;
     }
     private static function attack($wasRStrike=false){
         //Orderus
         $abilities = array(
             array(70, 100), //Health
-            array(70, 80), //Strength
-            array(45, 55), //Defence
-            array(40, 50), //Speed
-            array(10, 30), //Luck
-            array(10, 30), //Rapid strike
-            array(10, 30), //Magic shield
+            array(70, 80),  //Strength
+            array(45, 55),  //Defence
+            array(40, 50),  //Speed
+            array(10, 30),  //Luck
+            array(10, 30),  //Rapid strike
+            array(10, 30),  //Magic shield
         );
         $player1 = self::character($abilities, 1);
- 
-        // wild beasts
+        // wild beast
         $abilities = array(
-            array(60, 90), //Health
-            array(60, 90), //Strength
-            array(40, 60), //Defence
-            array(40, 60), //Speed
-            array(25, 40), //Luck
-            array(10, 30), //Rapid strike
-            array(10, 30), //Magic shield
+            array(60, 90),  //Health
+            array(60, 90),  //Strength
+            array(40, 60),  //Defence
+            array(40, 60),  //Speed
+            array(25, 40),  //Luck
+            array(10, 30),  //Rapid strike
+            array(10, 30),  //Magic shield
         );
         $player2 = self::character($abilities);
-       
         if(!self::$gameHealth){
             self::$gameHealth['player1']['abilities'][0] = $player1['abilities'][0];
             self::$gameHealth['player2']['abilities'][0] = $player2['abilities'][0];
         }
-
         $bHealth = array('player1'=>self::$gameHealth['player1']['abilities'][0], 'player2'=>self::$gameHealth['player2']['abilities'][0]);
-        // echo 'Before'.'</br>';
-        // echo '<pre>';
-        // print_r($bHealth);
-        // echo '</pre>';
-
         $p1 = $p2 = false;
         $speed = $player1['abilities'][3] - $player2['abilities'][3];
         $luck = $player1['abilities'][4] - $player2['abilities'][4];
@@ -119,20 +110,15 @@ class XGame {
             'health'=>$health,
             'data'=>array('player1'=>$player1, 'player2'=>$player2)
         );
-        // echo ($p1 ? 'P1' : 'P2').'<br>';
-        // echo 'After'.'</br>';
-        // echo '<pre>';
-        // print_r($stats);
-        // print_r(self::$gameHealth);
-        // echo '</pre>';
+
         $statsData = array(
             //before round stats
             'label'=>self::lang('round').' '.self::$gameCount,
             'before'=>array(
                 'health'=>array(
                     'label'=>self::lang('health'),
-                    'player1'=>'<b>'.self::lang('player').' 1:</b> '.$bHealth['player1'],
-                    'player2'=>'<b>'.self::lang('player').' 2:</b> '.$bHealth['player2'],
+                    'player1'=>'<b>'.self::lang('player').' 1</b> '.$bHealth['player1'],
+                    'player2'=>'<b>'.self::lang('player').' 2</b> '.$bHealth['player2'],
                 )
             ),
             //after round stats
@@ -146,8 +132,8 @@ class XGame {
                 'mSheild'=> $stats['mSheild'] ? self::lang('magic_sh') : '',
                 'health'=>array(
                     'label'=>self::lang('health'),
-                    'player1'=>'<b>'.self::lang('player').' 1:</b> '.(self::$gameHealth['player1']['abilities'][0] > 0 ? self::$gameHealth['player1']['abilities'][0] : self::lang('no_life')),
-                    'player2'=>'<b>'.self::lang('player').' 2:</b> '.(self::$gameHealth['player2']['abilities'][0] > 0 ? self::$gameHealth['player2']['abilities'][0] : self::lang('no_life')),
+                    'player1'=>'<b>'.self::lang('player').' 1</b> '.(self::$gameHealth['player1']['abilities'][0] > 0 ? self::$gameHealth['player1']['abilities'][0] : self::lang('no_life')),
+                    'player2'=>'<b>'.self::lang('player').' 2</b> '.(self::$gameHealth['player2']['abilities'][0] > 0 ? self::$gameHealth['player2']['abilities'][0] : self::lang('no_life')),
                 )
             ),
             'rapidStrike'=> $rStrike,
@@ -175,12 +161,12 @@ class XGame {
         if(self::$gameHealth){
             if(self::$gameHealth['player1'] && $hero){
                 $stageAbilities[0] = self::$gameHealth['player1']['abilities'][0];
-                //random chances of winning for rapid strike
+                //keep abilities for rapid the strike the round
                 //$stageAbilities[3] = self::$gameHealth['player1']['abilities'][3];
                 //$stageAbilities[4] = self::$gameHealth['player1']['abilities'][4];
             }elseif(self::$gameHealth['player2']){
                 $stageAbilities[0] = self::$gameHealth['player2']['abilities'][0];
-                //random chances of winning for rapid strike
+                //keep abilities for rapid the strike the round
                 //$stageAbilities[3] = self::$gameHealth['player2']['abilities'][3];
                 //$stageAbilities[4] = self::$gameHealth['player2']['abilities'][4];
             }
@@ -195,28 +181,26 @@ class XGame {
             echo '<div class="round">';
                 $mround = count($g) > 1 ? true : false;
                 foreach($g as $k=>$r){
-                    // echo '<pre>';
-                    // print_r($r);
-                    // echo '</pre>';
+                    $no_damage_msg = ( ($r['after']['mSheild'] && $r['stats']['winner'] == 2) || ($r['after']['damage_val'] <= 0) || ($r['after']['luck_val'] <= 0 && $r['stats']['winner'] == 2) || ($r['after']['luck_val'] > 0 && $r['stats']['winner'] == 1) );
                     if($k == 0) {
                         echo '<h1>'.$r['label'].'</h1>';
                         echo '<div class="before">';
-                            echo '<h3>'.$r['before']['health']['label'].'</h3>';
-                            echo '<div>'.$r['before']['health']['player1'].'</div>';
-                            echo '<div>'.$r['before']['health']['player2'].'</div>';
+                            echo '<h3 class="same_row">'.$r['before']['health']['label'].':</h3>';
+                            echo '<div class="half_field">'.$r['before']['health']['player1'].'</div>';
+                            echo '<div class="half_field">'.$r['before']['health']['player2'].'</div>';
                         echo '</div>';
                     }
                     echo '<div class="after">';
-                    echo $mround && $k != 0 ? '<h3>'.self::lang('rstrike_res').'</h3>' : '';
+                        echo $mround && $k != 0 ? '<h3>'.self::lang('rstrike_res').'</h3>' : '';
                         echo '<div>'.$r['after']['damage'].'</div>';
                         echo '<div>'.$r['after']['luck'].'</div>';
                         echo $k == 0 ? '<div>'.($r['after']['rStrike'] ? self::lang('rapid_st') : '').'</div>' : '';
                         echo '<div>'.($r['after']['mSheild'] ? self::lang('magic_sh') : '').'</div>';
-                        echo '<h2><b>'.$r['after']['winner'].( ( ($r['after']['mSheild'] && $r['stats']['winner'] == 2) || ($r['after']['damage_val'] <= 0) || ($r['after']['luck_val'] <= 0 && $r['stats']['winner'] == 2) || ($r['after']['luck_val'] > 0 && $r['stats']['winner'] == 1) ) ? ' ('.self::lang('no_damage').')' : '' ).'</b></h2>';
+                        echo '<h2><b>'.$r['after']['winner'].( $no_damage_msg  ? ' ('.self::lang('no_damage').')' : '' ).'</b></h2>';
                         if($mround && $k != 0 || (!$mround && $k == 0)){
-                            echo '<h3>'.$r['after']['health']['label'].'</h3>';
-                            echo '<div>'.$r['after']['health']['player1'].'</div>';
-                            echo '<div>'.$r['after']['health']['player2'].'</div>';
+                            echo '<h3 class="same_row">'.$r['after']['health']['label'].':</h3>';
+                            echo '<div class="half_field">'.$r['after']['health']['player1'].'</div>';
+                            echo '<div class="half_field">'.$r['after']['health']['player2'].'</div>';
                         }
                     echo '</div>';
                     if($r['stats']['data']['player1']['abilities'][0] <= 0){
@@ -231,9 +215,6 @@ class XGame {
                         );
                     }
                 }
-                // echo '<pre>';
-                //     print_r($g);
-                // echo '</pre>';
             echo '</div>'; 
             $count++;
 
@@ -251,7 +232,6 @@ class XGame {
                 echo '</div>';
                 exit;
             }
-            
         }
     }
 }
