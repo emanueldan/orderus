@@ -2,7 +2,7 @@
 XGame::$lang = array(
     'round'=>'Round',
     'game_end'=>'Game over',
-    'is_winner'=>'is the winner',
+    'is_winner'=>'is the winner!',
     'player'=>'Player',
     'health'=>'Health',
     'round_winner'=>'Round winner',
