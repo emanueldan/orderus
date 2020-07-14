@@ -15,6 +15,9 @@ html {
     background-color: #232323;
     color: #fff;
 }
+.round h1 {
+    float: right;
+}
 h1 {
     margin: 0;
     color: #fff;
@@ -24,6 +27,7 @@ h2 {
 }
 h3 {
     margin: 5px 0;
+    margin-bottom: 0px;
 }
 .before {
     margin-bottom: 10px;
@@ -36,6 +40,21 @@ h3 {
     text-align: center;
     display: block;
     padding: 40px 0;
+}
+.half_field {
+    vertical-align: top;
+    display: inline-block;
+    text-align: center;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+.same_row {
+    vertical-align: top;
+    display: inline-block;
+}
+.half_field > b {
+    display: block;
+    margin-bottom: 5px;
 }
 @media only screen and (max-width: 600px) { 
     .round {
