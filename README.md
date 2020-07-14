@@ -1,2 +1,2 @@
 # orderus
-Link: https://about.emanueldan.ro/orderus/
+https://about.emanueldan.ro/orderus/
