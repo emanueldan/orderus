@@ -1,7 +1,7 @@
 <?
 XGame::$lang = array(
     'round'=>'Round',
-    'game_end'=>'Game ended',
+    'game_end'=>'Game over',
     'is_winner'=>'is the winner',
     'player'=>'Player',
     'health'=>'Health',
