@@ -91,7 +91,7 @@ class XGame {
         $bHealth = array('player1'=>self::$gameHealth['player1']['abilities'][0], 'player2'=>self::$gameHealth['player2']['abilities'][0]);
         $p1 = $p2 = false;
 
-        //calculate speed and luck and decide who is the winner
+        //calculate speed, luck and decide who is the winner
         $speed = $player1['abilities'][3] - $player2['abilities'][3];
         $luck = $player1['abilities'][4] - $player2['abilities'][4];
         if($speed > 0){
